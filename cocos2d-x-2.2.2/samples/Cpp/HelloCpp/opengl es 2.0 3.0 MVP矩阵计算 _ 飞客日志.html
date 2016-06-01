@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://www.flakor.cn/2014-05-16-409.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/cm.js" charset="utf-8"></script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/plugin.js" async="" charset="utf-8" mod_name="tkapi-plugin"></script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/main.js" async="" charset="utf-8" mod_name="tkapi-main"></script><script charset="gbk" async="" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/tkapi.js"></script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/id.php" charset="utf-8"></script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/shares.php" charset="utf-8"></script>
+	<meta name="keywords" content="飞客,IT,编程语言,opengl es 2.0 3.0 MVP矩阵计算 , 飞客日志">
+	<meta name="description" content="opengl es 2.0 3.0 MVP矩阵计算 | 飞客日志">
+	<meta name="baidu-site-verification" content="YUCJDD2rad">
+	<meta name="360-site-verification" content="3535ea7d723eb566cde66a86ad329be0">
+		<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>
+		opengl es 2.0 3.0 MVP矩阵计算 | 飞客日志	</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="http://www.flakor.cn/xmlrpc.php">	
+<link rel="alternate" type="application/rss+xml" title="飞客日志 » Feed" href="http://www.flakor.cn/feed">
+<link rel="alternate" type="application/rss+xml" title="飞客日志 » 评论Feed" href="http://www.flakor.cn/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="飞客日志 » opengl es 2.0 3.0 MVP矩阵计算评论Feed" href="http://www.flakor.cn/2014-05-16-409.html/feed">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.flakor.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.8"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="travelify_style-css" href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="google_font_ubuntu-css" href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/css" type="text/css" media="all">
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/jquery.min.js"></script>
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/functions.min.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.flakor.cn/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.flakor.cn/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="OpenGL 坐标变换详解" href="http://www.flakor.cn/2014-05-15-384.html">
+<link rel="next" title="ubuntu su" href="http://www.flakor.cn/2014-05-17-467.html">
+<meta name="generator" content="WordPress 4.2.8">
+<link rel="canonical" href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志.html">
+<link rel="shortlink" href="http://www.flakor.cn/?p=409">
+<!-- 飞客日志 Custom CSS Styles -->
+<style type="text/css" media="screen">
+body { background-image: none; }
+</style>
+    <style type="text/css">
+        a { color: #5ee0c6; }
+        #site-title a { color: #5cd2db; }
+        #site-title a:hover { color: #5cd2db; }
+        .wrapper { background-color: #F8F8F8; }
+        .social-icons ul li a { color: #D0D0D0; }
+        #main-nav a, #main-nav a:hover,#main-nav ul li.current-menu-item a,#main-nav ul li.current_page_ancestor a,#main-nav ul li.current-menu-ancestor a,#main-nav ul li.current_page_item a,#main-nav ul li:hover > a { color: #FFF; }
+        .widget, article { background-color: #FFF; }
+        .entry-title, .entry-title a, h1, h2, h3, h4, h5, h6, .widget-title  { color: #444; }
+        a:focus, a:active, a:hover, .tags a:hover, .custom-gallery-title a, .widget-title a, #content ul a:hover,#content ol a:hover, .widget ul li a:hover, .entry-title a:hover, .entry-meta a:hover, #site-generator .copyright a:hover { color: #60dce5; }
+        #main-nav { background-color: #34b6e5; border-color: #34b6e5; }
+    	#main-nav ul li ul, body { border-color: #34b6e5; }
+    	#main-nav a:hover,#main-nav ul li.current-menu-item a,#main-nav ul li.current_page_ancestor a,#main-nav ul li.current-menu-ancestor a,#main-nav ul li.current_page_item a,#main-nav ul li:hover > a, #main-nav li:hover > a,#main-nav ul ul :hover > a,#main-nav a:focus { background-color: #53d4e8; }
+    	#main-nav ul li ul li a:hover,#main-nav ul li ul li:hover > a,#main-nav ul li.current-menu-item ul li a:hover { color: #53d4e8; }
+    	.entry-content { color: #444; }
+    	input[type="reset"], input[type="button"], input[type="submit"], a.readmore, ::selection, #controllers a:hover, #controllers a.active, .pagination span, .pagination a:hover span { background-color: #5cd2db; border-color: #5cd2db }
+    	blockquote { border-color: #5cd2db }
+        #controllers a:hover, #controllers a.active { color: #5cd2db }
+    	input[type="reset"]:hover,input[type="button"]:hover,input[type="submit"]:hover,input[type="reset"]:active,input[type="button"]:active,input[type="submit"]:active, a.readmore:hover, a.readmore:active, ul.default-wp-page li a:hover, ul.default-wp-page li a:active { background-color: #5cc6db; border-color: #5cc6db }
+    </style>
+    	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #d3d3d3; background-image: url('http://www.flakor.cn/wp-content/uploads/2015/09/net_bg.png'); background-repeat: repeat; background-position: top left; background-attachment: fixed; }
+</style>
+<link rel="stylesheet" type="text/css" href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/shCore.css"><link rel="stylesheet" type="text/css" href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/m.js"></script></head>
+
+<body class="single single-post postid-409 single-format-standard custom-background "><link href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/jiathis_counter.css" rel="stylesheet" type="text/css"><link href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/jiathis_utility.html" style="display: none;"></iframe>
+	
+	<div class="wrapper">
+				<header id="branding">
+				
+	<div class="container clearfix">
+		<div class="hgroup-wrap clearfix">
+					<section class="hgroup-right">
+						
+			<div class="social-icons clearfix">
+				<ul><li class="rss"><a href="http://www.flakor.cn/feed" title="飞客日志 on RSS" target="_blank"></a></li>
+			</ul>
+			</div><!-- .social-icons -->					</section><!-- .hgroup-right -->	
+				<hgroup id="site-logo" class="clearfix">
+												<h1 id="site-title"> 
+								<a href="http://www.flakor.cn/" title="飞客日志" rel="home">
+									飞客日志								</a>
+							</h1>
+							<h2 id="site-description">专注于IT的日志站点</h2>
+											
+				</hgroup><!-- #site-logo -->
+			
+		</div><!-- .hgroup-wrap -->
+	</div><!-- .container -->	
+		
+	<nav id="main-nav" class="clearfix">
+					<div class="container clearfix">
+						<ul class="root l_tinynav1"><li id="menu-item-932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-932"><a href="http://www.flakor.cn/category/lang">编程语言</a>
+<ul class="sub-menu">
+	<li id="menu-item-933" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-933"><a href="http://www.flakor.cn/category/lang/cc">C/C++</a></li>
+	<li id="menu-item-934" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-934"><a href="http://www.flakor.cn/category/lang/java">Java</a></li>
+	<li id="menu-item-935" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-935"><a href="http://www.flakor.cn/category/lang/swift">swift</a></li>
+	<li id="menu-item-936" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-936"><a href="http://www.flakor.cn/category/lang/assembly">汇编</a></li>
+</ul>
+</li>
+<li id="menu-item-915" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-915"><a href="http://www.flakor.cn/category/os">操作系统</a>
+<ul class="sub-menu">
+	<li id="menu-item-916" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-916"><a href="http://www.flakor.cn/category/os/linux">Linux</a></li>
+	<li id="menu-item-917" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-917"><a href="http://www.flakor.cn/category/os/unix">unix</a></li>
+</ul>
+</li>
+<li id="menu-item-912" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-912"><a href="http://www.flakor.cn/category/web">Web</a>
+<ul class="sub-menu">
+	<li id="menu-item-913" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-913"><a href="http://www.flakor.cn/category/web/node">node.js</a></li>
+	<li id="menu-item-914" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-914"><a href="http://www.flakor.cn/category/web/php">php</a></li>
+</ul>
+</li>
+<li id="menu-item-929" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-929"><a href="http://www.flakor.cn/category/mobile">移动</a>
+<ul class="sub-menu">
+	<li id="menu-item-930" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-930"><a href="http://www.flakor.cn/category/mobile/android">Android</a></li>
+	<li id="menu-item-931" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-931"><a href="http://www.flakor.cn/category/mobile/ios">iOS</a></li>
+</ul>
+</li>
+<li id="menu-item-924" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-924"><a href="http://www.flakor.cn/category/buildsystem">构建系统</a>
+<ul class="sub-menu">
+	<li id="menu-item-925" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-925"><a href="http://www.flakor.cn/category/buildsystem/gradle">gradle</a></li>
+</ul>
+</li>
+<li id="menu-item-926" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-926"><a href="http://www.flakor.cn/category/game">游戏开发</a>
+<ul class="sub-menu">
+	<li id="menu-item-927" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-927"><a href="http://www.flakor.cn/category/game/diary">引擎开发日志</a></li>
+	<li id="menu-item-928" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-928"><a href="http://www.flakor.cn/category/game/engine">引擎知识</a></li>
+</ul>
+</li>
+<li id="menu-item-918" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-918"><a href="http://www.flakor.cn/category/literature">文学</a>
+<ul class="sub-menu">
+	<li id="menu-item-919" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-919"><a href="http://www.flakor.cn/category/literature/essay">杂文语录</a></li>
+	<li id="menu-item-920" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-920"><a href="http://www.flakor.cn/category/literature/short">短篇小说</a></li>
+	<li id="menu-item-921" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-921"><a href="http://www.flakor.cn/category/literature/poem">诗词歌赋</a></li>
+	<li id="menu-item-922" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-922"><a href="http://www.flakor.cn/category/literature/novel">长篇小说</a>
+	<ul class="sub-menu">
+		<li id="menu-item-923" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-923"><a href="http://www.flakor.cn/category/literature/novel/dragoncraft">龙源录</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-910" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-910"><a href="http://www.flakor.cn/%e5%bc%80%e5%8f%91%e8%bd%af%e4%bb%b6%e4%b8%8b%e8%bd%bd">开发软件下载</a></li>
+<li id="menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-911"><a href="http://www.flakor.cn/about">关于</a></li>
+<li class="default-menu"><a href="http://www.flakor.cn/" title="Navigation">导航</a></li><li id="menu-item-21" class="menu-item menu-item-right menu-item-type-post_type menu-item-object-page menu-item-21"><a href="http://www.flakor.cn/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD">常用下载</a></li>
+					</ul><select class="tinynav tinynav1"><option value="http://www.flakor.cn/category/lang">编程语言</option><option value="http://www.flakor.cn/category/lang/cc">- C/C++</option><option value="http://www.flakor.cn/category/lang/java">- Java</option><option value="http://www.flakor.cn/category/lang/swift">- swift</option><option value="http://www.flakor.cn/category/lang/assembly">- 汇编</option><option value="http://www.flakor.cn/category/os">操作系统</option><option value="http://www.flakor.cn/category/os/linux">- Linux</option><option value="http://www.flakor.cn/category/os/unix">- unix</option><option value="http://www.flakor.cn/category/web">Web</option><option value="http://www.flakor.cn/category/web/node">- node.js</option><option value="http://www.flakor.cn/category/web/php">- php</option><option value="http://www.flakor.cn/category/mobile">移动</option><option value="http://www.flakor.cn/category/mobile/android">- Android</option><option value="http://www.flakor.cn/category/mobile/ios">- iOS</option><option value="http://www.flakor.cn/category/buildsystem">构建系统</option><option value="http://www.flakor.cn/category/buildsystem/gradle">- gradle</option><option value="http://www.flakor.cn/category/game">游戏开发</option><option value="http://www.flakor.cn/category/game/diary">- 引擎开发日志</option><option value="http://www.flakor.cn/category/game/engine">- 引擎知识</option><option value="http://www.flakor.cn/category/literature">文学</option><option value="http://www.flakor.cn/category/literature/essay">- 杂文语录</option><option value="http://www.flakor.cn/category/literature/short">- 短篇小说</option><option value="http://www.flakor.cn/category/literature/poem">- 诗词歌赋</option><option value="http://www.flakor.cn/category/literature/novel">- 长篇小说</option><option value="http://www.flakor.cn/category/literature/novel/dragoncraft">- - 龙源录</option><option value="http://www.flakor.cn/%e5%bc%80%e5%8f%91%e8%bd%af%e4%bb%b6%e4%b8%8b%e8%bd%bd">开发软件下载</option><option value="http://www.flakor.cn/about">关于</option><option value="http://www.flakor.cn">导航</option><option value="http://www.flakor.cn/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD" selected="selected">常用下载</option></select>
+						</div><!-- .container -->
+					</nav><!-- #main-nav --> 		
+				</header>
+		
+				<div id="main" class="container clearfix">
+
+<div id="container">
+	
+
+<div id="primary" class="no-margin-left">
+   <div id="content">	<section id="post-409" class="post-409 post type-post status-publish format-standard hentry category-engine category-game">
+		<article>
+
+			
+			<header class="entry-header">
+    			<h2 class="entry-title">
+    				opengl es 2.0 3.0 MVP矩阵计算    			</h2><!-- .entry-title -->
+  		</header>
+
+  		
+  		
+  			<div class="entry-meta-bar clearfix">
+    			<div class="entry-meta">
+	    				<span class="author"><a href="http://www.flakor.cn/author/saint">saint</a></span>
+	    				<span class="date"><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志.html" title="08:53">2014年5月16日</a></span>
+	    					             		<span class="category"><a href="http://www.flakor.cn/category/game/engine" rel="category tag">引擎知识</a>, <a href="http://www.flakor.cn/category/game" rel="category tag">游戏开发</a></span>
+	             		    					             		<span class="comments"><a href="http://www.flakor.cn/2014-05-16-409.html#comments">1 条评论</a></span>
+	             	    			</div><!-- .entry-meta -->
+    		</div>
+
+				
+				
+  			<div class="entry-content clearfix">
+    			<p>从2.0开始，opengl es不再提供glRotate()等函数，因此MVP矩阵需要我们自己计算，并赋值给GLSL。<br>
+<span style="color: #ff0000;"><strong>1) 先来看下opengl所用的矩阵的基本知识：</strong></span><br>
+Opengl 使用的是列矩阵，即顶点向量等是用列向量的齐次坐标表示的。<br>
+另外其矩阵存储方式是“列主序（column-major order）/列优先”<br>
+线性代数意义的同一个矩阵，在d3d 和　opengl 中却有不同的存储顺序</p>
+<div><div id="highlighter_983964" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">01</div><div class="line number2 index1 alt1">02</div><div class="line number3 index2 alt2">03</div><div class="line number4 index3 alt1">04</div><div class="line number5 index4 alt2">05</div><div class="line number6 index5 alt1">06</div><div class="line number7 index6 alt2">07</div><div class="line number8 index7 alt1">08</div><div class="line number9 index8 alt2">09</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">线代：a11,a12,a13,a14</code></div><div class="line number2 index1 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a21,a22,a23,a24</code></div><div class="line number3 index2 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a31,a32,a33,a34</code></div><div class="line number4 index3 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a41,a42,a43,a44</code></div><div class="line number5 index4 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">d3d :&nbsp; a11,a12,a13,a14</code></div><div class="line number6 index5 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a21,a22,a23,a24</code></div><div class="line number7 index6 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a31,a32,a33,a34</code></div><div class="line number8 index7 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a41,a42,a43,a44</code></div><div class="line number9 index8 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">gl: a11,a21,a31,a41</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a12,a22,a32,a42</code></div><div class="line number11 index10 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a13,a23,a33,a43</code></div><div class="line number12 index11 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">a14,a24,a34,a44</code></div></div></td></tr></tbody></table></div></div>
+<p>矩阵x顶点（记住顺序！！矩阵左乘顶点，顶点用列向量表示）= 变换后的顶点<br>
+<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/MatrixXVect-300x71.gif"><img class="alignnone size-full wp-image-412" alt="MatrixXVect-300x71" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/MatrixXVect-300x71.gif" width="300" height="71"></a><br>
+这里有<a title="http://www.flakor.cn/2014-01-18-182.html" href="http://www.flakor.cn/2014-01-18-182.html" target="_blank">粗略的介绍</a></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_anglestoaxes01.png"><img class="alignnone size-full wp-image-411" alt="gl_anglestoaxes01" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_anglestoaxes01.png" width="310" height="200"></a><br>
+下面来分析一下：<br>
+如上图，3个元素集(m0, m1, m2),(m4, m5, m6)和(m8, m9, m10) 是用作欧拉变换和仿射变换，例如1.0中提供的函数glRotate(),缩放glScalef().</p>
+<p>注意这三个元素集实际上指得是3个正交坐标系：<br>
+(m0, m1, m2)： +X 轴，向左的向量(left vector)(相对屏幕自己),默认为(1,0,0)<br>
+(m4, m5, m6) : +Y轴，向上的向量(up vector),默认为(0,1,0)<br>
+(m8, m9, m10): +Z轴，向前的向量，默认为(0,0,1).</p>
+<p>因为使用的是左乘，所以变换的顺序是相对于乘法是逆向的，即最后的变换出现在矩阵相乘之前，最先的变换在最后出现。：<br>
+<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform05.png"><img class="alignnone size-full wp-image-414" alt="gl_transform05" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform05.png" width="257" height="19"></a><br>
+TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;<br>
+这行代码最先执行缩放，接着旋转，最后才是平移。<br>
+用GLSL表示：</p>
+<p>mat4 transform = projectionMat* viewMat * modeMat;<br>
+vec4 out_vec = transform * in_vec;</p>
+<p>因为model矩阵变换比较简单。所以在这里不再讲解，主要讲解View（又叫相机）矩阵和投影（projection）矩阵的构建</p>
+<p><span style="color: #ff0000;">2)View 矩阵（相机矩阵）</span><br>
+先来看下1.0和1.1里面提供的函数<br>
+函数原型<br>
+void gluLookAt(GLdouble eyex,GLdouble eyey,GLdouble eyez,GLdouble centerx,GLdouble centery,GLdouble centerz,GLdouble upx,GLdouble upy,GLdouble upz);<br>
+该函数定义一个视图矩阵，并与当前矩阵相乘。<br>
+第一组eyex, eyey,eyez 相机在世界坐标的位置<br>
+第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置<br>
+第三组upx,upy,upz 相机向上的方向在世界坐标中的方向<br>
+你把相机想象成为你自己的脑袋：<br>
+第一组数据就是脑袋的位置<br>
+第二组数据就是眼睛看的物体的位置<br>
+第三组就是头顶朝向的方向（因为你可以歪着头看同一个物体）。<br>
+<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_lookattoaxes01.png"><img class="alignnone size-full wp-image-416" alt="gl_lookattoaxes01" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_lookattoaxes01.png" width="250" height="164"></a><br>
+如图，P1为点（centerx，centery,centerz）,P2为点（eyex,eyey,eyez）,u’为给定的向上向量（upx,upy,upz）.<br>
+先求出朝向向量（Lookat Vertor）为P2 – P1.用伪代码表示（下同）<br>
+Vertor3 lookat = （eyex-centerx,eyey-centery,eyez-centerz）;<br>
+朝向坐标（Forward axis）只要将朝向向量转为单位向量（Vectors Normalizing）</p>
+<p>Vertex3 forward = lookat.normalize();<br>
+左坐标由给定的向上向量与朝向向量的叉乘计算得出。<br>
+Vertex3 left = (upx,upy,upz)xforward;<br>
+向上坐标由朝向坐标与左坐标的叉乘计算得出：<br>
+Vertex3 up = forward x left;<br>
+注意left，up计算后都需要进行归一化计算；</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/VIEWER.png"><img class="alignnone size-medium wp-image-420" alt="VIEWER" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/VIEWER-500x289.png" width="500" height="289"></a></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/eyecamera.png"><img class="alignnone size-full wp-image-422" alt="eyecamera" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/eyecamera.png" width="438" height="199"></a><br>
+我们要把一个世界坐标系点K(Kx, Ky, Kz)，表示成(U,V,N)坐标系的点（假设此时，已经经过平移操作，摄像机在世界坐标系的原点），则其公式为：<br>
+Px Ux*kx + Uy* ky + Uz*Kz<br>
+py = Vx*kx + Vy* ky + Vz*Kz<br>
+px Nx*kx + Ny* ky + Nz*Kz<br>
+于是我们构建出矩阵<br>
+|leftx lefty leftx|<br>
+|upx upy upy |<br>
+|forwardx forwardy forwardz|<br>
+加上eye的平移：<br>
+<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/CAMERA.png"><img class="alignnone size-full wp-image-421" alt="CAMERA" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/CAMERA.png" width="462" height="106"></a></p>
+<p><span style="color: #ff0000;"><strong>3，投影矩阵 Projection Matrix</strong></span></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_frustumclip.png"><img class="alignnone size-full wp-image-428" alt="gl_frustumclip" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_frustumclip.png" width="300" height="200"></a></p>
+<p>投影变换矩阵用来完成从眼睛坐标系向裁剪坐标系的变换，然后裁剪坐标系再除以系数w，变换到单位换设备坐标系(NDC)</p>
+<p>值得注意的是&nbsp;在裁剪坐标中, x<sub>c</sub>, y<sub>c</sub>and z<sub>c</sub>&nbsp;与w<sub>c比较</sub>. 如果改坐标 小于-w<sub>c</sub>, 或大于w<sub>c</sub>, 则该顶点将被抛弃.</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq27.png"><img class="alignnone size-full wp-image-455" alt="gl_projectionmatrix_eq27" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq27.png" width="178" height="16"></a></p>
+<p>1）透视矩阵</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix01.png"><img class="alignnone size-full wp-image-429" alt="gl_projectionmatrix01" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix01.png" width="470" height="230"></a></p>
+<p>在透视投影情况下，视景体空间是眼睛坐标系下形成的一个台柱，这个台柱最终映射到单位化的NDC坐标系上，即：x坐标由[l,r]到[-1,1]，y坐标由[b,&nbsp;t]到[-1,1]，x坐标由[n,&nbsp;f]到[-1,1]。</p>
+<p>同时我们应该注意一点：视觉坐标系是右手坐标系，但是NDC坐标系是左手坐标系。那么，相机是位于原点，向Z轴负方向观察（在视觉空间中），但是，在NDC空间中变成了Z轴正方向。</p>
+<p>在OpenGL中，三维视觉空间中一点(xe,ye,ze)被投影在近平面上(xp,&nbsp;yp,&nbsp;zp)上，如下图。</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix03.png"><img class="alignnone size-full wp-image-432" alt="gl_projectionmatrix03" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix03.png" width="360" height="300"></a><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix04.png"><img class="alignnone size-full wp-image-431" alt="gl_projectionmatrix04" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix04.png" width="360" height="300"></a></p>
+<p>从截锥体上方看, 视野空间（eye space）里的X轴x<sub>e</sub>&nbsp;被映射到 x<sub>p</sub>,可利用相似三角形比例算出：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq01.png"><img class="alignnone size-full wp-image-433" alt="gl_projectionmatrix_eq01" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq01.png" width="187" height="86"></a>&nbsp;同理<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq02.png"><img class="alignnone size-full wp-image-434" alt="gl_projectionmatrix_eq02" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq02.png" width="182" height="87"></a></p>
+<p>可见xp和yp的计算都依赖于ze，他们都反比-ze。这是构建投影矩阵的第一条线索。在视野坐标通过右乘投影矩阵的变换后（Projection Matrix），裁剪空间仍然是齐次坐标，它最后通过除以自己的-w变成NDC坐标</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform081.png"><img class="alignnone size-full wp-image-435" alt="gl_transform08" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform081.png" width="231" height="79"></a>，<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform121.png"><img class="alignnone size-full wp-image-436" alt="gl_transform12" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_transform121.png" width="178" height="59"></a></p>
+<p>所以我们将w变量设置为-ze。于是GL_PROJECTION矩阵的第四行就是(0,0,&nbsp;-1,&nbsp;0)。</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq03.png"><img class="alignnone size-full wp-image-438" alt="gl_projectionmatrix_eq03" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq03.png" width="429" height="94"></a></p>
+<p>接着，将裁剪空间中的xp和yp轴线性关系映射到NDC坐标系，&nbsp;[l,&nbsp;r]&nbsp;⇒&nbsp;[-1,&nbsp;1]&nbsp;and&nbsp;[b,&nbsp;t]&nbsp;⇒&nbsp;[-1,&nbsp;1]。可以推导出：</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/mapXptoXn.png"><img class="alignnone size-medium wp-image-440" alt="mapXptoXn" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/mapXptoXn-500x406.png" width="500" height="406"></a></p>
+<p>根据两点求直线方程</p>
+<p>两点式:(x-x1)/(x2-x1)=(y-y1)/(y2-y1) 求解。举X计算为例：</p>
+<p>加（r,1）（l，-1）带入上式</p>
+<p>（Xp-r）/（r-l）=(Xn -1)/2</p>
+<p>Xn = 2(Xp-r)/(r-l) +1</p>
+<p>Xn = (2Xp-r-l)/(r-l)</p>
+<p>然后将裁剪空间中的xp和yp使用视觉空间中的xe和ye代替：</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/xpyp.png"><img class="alignnone size-medium wp-image-441" alt="xpyp" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/xpyp-500x273.png" width="500" height="273"></a></p>
+<p>由前面我们将w设置为-ze可知道，上面两个方程的分母就是裁剪空间中的坐标xc和yc。于是有下面的透视矩阵：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq08.png"><img class="alignnone size-full wp-image-437" alt="gl_projectionmatrix_eq08" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq08.png" width="320" height="165"></a></p>
+<p>至此，我们只需要求解第三行了，求解Zn和Ze变换关系和求解x、y略有不同，因为视觉空间中的ze总是会投影到-n的近裁剪平面上。但是，我们需要的z值必须满足唯一性，以便为了裁剪和深度测试，此外还必须满足可逆变换条件。因为很显然，我们知道z的变换，不依赖x和y，所以，我们将GL_PROJECT矩阵假设为如下表示：</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/gl_projectionmatrix_eq10.png"><img class="alignnone size-medium wp-image-442" alt="gl_projectionmatrix_eq10" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq10-500x137.png" width="500" height="137"></a></p>
+<p>在视觉坐标系中We=1，于是：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq11.png"><img class="alignnone size-full wp-image-444" alt="gl_projectionmatrix_eq11" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq11.png" width="119" height="43"></a></p>
+<p>为了计算A和B，我们使用(ze,&nbsp;zn)&nbsp;、(-near,&nbsp;-1)和&nbsp;(-far<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq13.png"><img class="alignnone size-full wp-image-446" alt="gl_projectionmatrix_eq13" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq13.png" width="170" height="21"></a>,&nbsp;1)的关系，&nbsp;带入上面方程：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq12.png"><img class="alignnone size-full wp-image-445" alt="gl_projectionmatrix_eq12" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq12.png" width="417" height="112"></a></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq13.png"><img class="alignnone size-full wp-image-446" alt="gl_projectionmatrix_eq13" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq13.png" width="170" height="21"></a></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq14.png"><img class="alignnone size-full wp-image-447" alt="gl_projectionmatrix_eq14" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq14.png" width="260" height="121"></a></p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/gl_projectionmatrix_eq15.png"><img class="alignnone size-medium wp-image-448" alt="gl_projectionmatrix_eq15" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq15-500x163.png" width="500" height="163"></a></p>
+<p>求出AB，于是：z<sub>e</sub>&nbsp;和z<sub>n的方程变成</sub></p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq17.png"><img class="alignnone size-full wp-image-449" alt="gl_projectionmatrix_eq17" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq17.png" width="259" height="50"></a></p>
+<p>于是完整的透视投影矩阵就出来了：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq16.png"><img class="alignnone size-full wp-image-450" alt="gl_projectionmatrix_eq16" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq16.png" width="243" height="176"></a></p>
+<p>通常我们所设置的视景体空间都是对称的：l&nbsp;=-r,&nbsp;b=-t。所以上面的投影矩阵就简化为下面的对称投影变换矩阵</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq20.png"><img class="alignnone size-medium wp-image-451" alt="gl_projectionmatrix_eq20" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq20.png" width="387" height="268"></a></p>
+<p>最后，我们再看看ze和zn的关系式：<br>
+，可见他俩并非是线性关系，就是说在近平面处精确度高，在远平面处精度低。所以如果[-n,-f]设置过大就会面临精确度问题。z<sub>e在远平面的小变化无法影响Zn的值</sub>&nbsp;，所以<em>n</em>&nbsp;和<em>f之间的距离尽量小以减少这种深度缓冲精确度问题</em>（the depth buffer precision problem）.</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/gl_projectionmatrix07.png"><img class="alignnone size-medium wp-image-452" alt="gl_projectionmatrix07" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix07-500x153.png" width="500" height="153"></a></p>
+<p>2）正交矩阵</p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/gl_projectionmatrix02.png"><img class="alignnone size-medium wp-image-456" alt="gl_projectionmatrix02" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix02-500x225.png" width="500" height="225"></a></p>
+<p><a href="http://www.flakor.cn/wp-content/uploads/2014/05/zhengjiao.png"><img class="alignnone size-medium wp-image-458" alt="zhengjiao" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/zhengjiao-500x465.png" width="500" height="465"></a></p>
+<p>因为w对应正交投影无意义，所以第四行保持（0,0,0,1）,因此矩阵为</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq24.png"><img class="alignnone size-full wp-image-459" alt="gl_projectionmatrix_eq24" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq24.png" width="226" height="167"></a></p>
+<p>如果r=-l,t=-b，将进一步简化矩阵：</p>
+<p><a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq25.png"><img class="alignnone size-full wp-image-460" alt="gl_projectionmatrix_eq25" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/gl_projectionmatrix_eq25.png" width="368" height="246"></a></p>
+<p><strong>备注：</strong><br>
+向量归一化分两步:<br>
+1 计算出向量的模，即长度<br>
+2 将它的各个分量(xy or xyz)除以它的模<br>
+|a| = sqrt((ax * ax) + (ay * ay) + (az * az))<br>
+x = ax/|a|<br>
+y = ay/|a|<br>
+z = az/|a|</p>
+<p>两个向量a和b的叉积写作a×b（有时也被写成a∧b，避免和字母x混淆）。向量积可以被定义为：<br>
+|向量a×向量b|=|a||b|sinθ在这里θ表示两向量之间的角夹角（0° ≤ θ ≤ 180°），它位于这两个矢量所定义的平面上。<br>
+这个定义有一个问题，就是同时有两个单位向量都垂直于和：若满足垂直的条件，那么也满足。</p>
+<p>一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，当右手的四指从a以不超过180度的转角转向b时，竖起的大拇指指向是c的方向。<br>
+向量积|c|=|a×b|=|a| |b|sin&lt;a,b&gt;<br>
+即c的长度在数值上等于以a，b，夹角为θ组成的平行四边形的面积。<br>
+c的方向垂直于a与b所决定的平面，c的指向按右手规则从a转向b来确定。<br>
+a×b=(aybz-azby)i+(azbx-axbz)j+(axby-aybx)k,为了帮助记忆，利用三阶行列式，写成<br>
+b×a= -a×b右手规则<br>
+<a href="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/vertorcross.png"><img class="alignnone size-full wp-image-418" alt="vertorcross" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/vertorcross.png" width="230" height="292"></a></p>
+<div style="clear:both; margin-top:5px; margin-bottom:5px;"></div><div style="float:left"><!-- JiaThis Button BEGIN -->
+<div id="jiathis_style_32x32">
+	<a class="jiathis_button_qzone" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+	<a class="jiathis_button_tsina" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+	<a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+	<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+	<a class="jiathis_button_kaixin001" title="分享到开心网"><span class="jiathis_txt jtico jtico_kaixin001"></span></a>
+	<a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_80" title="累计分享1次">1</span></a>
+</div>
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/jia.js" charset="utf-8"></script><script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/plugin.client.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></div><div style="clear:both; margin-top:5px; margin-bottom:5px;"></div>  			</div>
+
+  						<ul class="default-wp-page clearfix">
+				<li class="previous"><a href="http://www.flakor.cn/2014-05-15-384.html" rel="prev"><span class="meta-nav">←</span> OpenGL 坐标变换详解</a></li>
+				<li class="next"><a href="http://www.flakor.cn/2014-05-17-467.html" rel="next">ubuntu su <span class="meta-nav">→</span></a></li>
+			</ul>
+		
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			1 条思考于 “<span>opengl es 2.0 3.0 MVP矩阵计算</span>”		</h2>
+
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="li-comment-7505">
+		<article id="comment-7505" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/26d6428ed2d9475051aa51e4f8f0bb61" srcset="http://gravatar.duoshuo.com/avatar/26d6428ed2d9475051aa51e4f8f0bb61?s=88&amp;d=mm&amp;r=g 2x" class="avatar avatar-44 photo" height="44" width="44"><cite class="fn">mayan </cite><a href="http://www.flakor.cn/2014-05-16-409.html#comment-7505"><time pubdate="" datetime="2015-04-16T11:06:07+00:00">2015年4月16日 于 11:06</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>投影矩阵那块我看不太明白，想请教一下，能加一下我的QQ吗？741045618</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://www.flakor.cn/2014-05-16-409.html?replytocom=7505#respond" onclick="return addComment.moveForm( &quot;comment-7505&quot;, &quot;7505&quot;, &quot;respond&quot;, &quot;409&quot; )" aria-label="回复给mayan">回复</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+		</ol><!-- .commentlist -->
+
+		
+	
+							<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.flakor.cn/2014-05-16-409.html#respond" style="display:none;">取消回复</a></small></h3>
+									<form action="http://www.flakor.cn/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p>							<p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required="true" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required="true" required="required"></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="text" value="" size="30"></p>
+												<p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">您可以使用这些<abbr title="HyperText Markup Language">HTML</abbr>标签和属性： <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+						<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="409" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e750a37002"></p><p style="display: none;"></p>					<input type="hidden" id="ak_js" name="ak_js" value="1462638470979"></form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments .comments-area -->
+		</article>
+	</section>
+</div><!-- #content --></div><!-- #primary -->
+
+
+<div id="secondary">
+	
+
+<aside id="search-2" class="widget widget_search">	<form action="http://www.flakor.cn/" class="searchform clearfix" method="get">
+		<label class="assistive-text" for="s">搜索</label>
+		<input type="text" placeholder="搜索" class="s field" name="s">
+	</form></aside><aside id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap"><table id="wp-calendar">
+	<caption>2014年五月</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="星期一">一</th>
+		<th scope="col" title="星期二">二</th>
+		<th scope="col" title="星期三">三</th>
+		<th scope="col" title="星期四">四</th>
+		<th scope="col" title="星期五">五</th>
+		<th scope="col" title="星期六">六</th>
+		<th scope="col" title="星期日">日</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="http://www.flakor.cn/2014/04">« 四</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next"><a href="http://www.flakor.cn/2014/06">六 »</a></td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="3" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td><a href="http://www.flakor.cn/2014/05/04" title="JavaScript获取图片的原始尺寸">4</a></td>
+	</tr>
+	<tr>
+		<td>5</td><td><a href="http://www.flakor.cn/2014/05/06" title="C++,类的对象和类的指针">6</a></td><td><a href="http://www.flakor.cn/2014/05/07" title="jni 调用c和c++的区别.
+gcc: multiple definition of 链接错误
+OpenGL ES 坐标变换">7</a></td><td><a href="http://www.flakor.cn/2014/05/08" title="《龙源录》,第三回 定风龙珠
+《龙源录》,第四回 应龙托命
+Android 完全使用命令行开发">8</a></td><td>9</td><td>10</td><td>11</td>
+	</tr>
+	<tr>
+		<td>12</td><td>13</td><td>14</td><td><a href="http://www.flakor.cn/2014/05/15" title="android调试工具addr2line使用
+OpenGL 坐标变换详解">15</a></td><td><a href="http://www.flakor.cn/2014/05/16" title="opengl es 2.0 3.0 MVP矩阵计算">16</a></td><td><a href="http://www.flakor.cn/2014/05/17" title="ubuntu su">17</a></td><td>18</td>
+	</tr>
+	<tr>
+		<td>19</td><td><a href="http://www.flakor.cn/2014/05/20" title="ubuntu Android配置真机调试
+《龙源录》,第五回 九天庙会
+《龙源录》,第六回 吞江饮河">20</a></td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td>
+	</tr>
+	<tr>
+		<td>26</td><td><a href="http://www.flakor.cn/2014/05/27" title="Android TextView使用SpannableString分段显示不同样式">27</a></td><td><a href="http://www.flakor.cn/2014/05/28" title="android Paint 渐变色
+Android 绘制圆形头像">28</a></td><td>29</td><td>30</td><td>31</td>
+		<td class="pad" colspan="1">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h3 class="widget-title">标签</h3><div class="tagcloud"><a href="http://www.flakor.cn/tag/android-2" class="tag-link-11" title="7个话题" style="font-size: 22pt;">android</a>
+<a href="http://www.flakor.cn/tag/android-studio" class="tag-link-17" title="3个话题" style="font-size: 15pt;">android studio</a>
+<a href="http://www.flakor.cn/tag/c" class="tag-link-13" title="4个话题" style="font-size: 17.333333333333pt;">C</a>
+<a href="http://www.flakor.cn/tag/char" class="tag-link-7" title="1个话题" style="font-size: 8pt;">char*</a>
+<a href="http://www.flakor.cn/tag/freebsd" class="tag-link-37" title="1个话题" style="font-size: 8pt;">freebsd</a>
+<a href="http://www.flakor.cn/tag/goagent" class="tag-link-21" title="1个话题" style="font-size: 8pt;">goagent</a>
+<a href="http://www.flakor.cn/tag/gradle" class="tag-link-18" title="4个话题" style="font-size: 17.333333333333pt;">gradle</a>
+<a href="http://www.flakor.cn/tag/ios-2" class="tag-link-43" title="2个话题" style="font-size: 12.2pt;">ios</a>
+<a href="http://www.flakor.cn/tag/jni" class="tag-link-8" title="1个话题" style="font-size: 8pt;">jni</a>
+<a href="http://www.flakor.cn/tag/jstring" class="tag-link-6" title="1个话题" style="font-size: 8pt;">jstring</a>
+<a href="http://www.flakor.cn/tag/linux-2" class="tag-link-42" title="3个话题" style="font-size: 15pt;">linux</a>
+<a href="http://www.flakor.cn/tag/mac" class="tag-link-44" title="1个话题" style="font-size: 8pt;">mac</a>
+<a href="http://www.flakor.cn/tag/make" class="tag-link-15" title="1个话题" style="font-size: 8pt;">make</a>
+<a href="http://www.flakor.cn/tag/makefile" class="tag-link-14" title="2个话题" style="font-size: 12.2pt;">makefile</a>
+<a href="http://www.flakor.cn/tag/mysql" class="tag-link-46" title="1个话题" style="font-size: 8pt;">mysql</a>
+<a href="http://www.flakor.cn/tag/opengl" class="tag-link-47" title="2个话题" style="font-size: 12.2pt;">opengl</a>
+<a href="http://www.flakor.cn/tag/php" class="tag-link-16" title="2个话题" style="font-size: 12.2pt;">php</a>
+<a href="http://www.flakor.cn/tag/redis" class="tag-link-33" title="1个话题" style="font-size: 8pt;">redis</a>
+<a href="http://www.flakor.cn/tag/tar" class="tag-link-24" title="1个话题" style="font-size: 8pt;">tar</a>
+<a href="http://www.flakor.cn/tag/ubuntu" class="tag-link-19" title="2个话题" style="font-size: 12.2pt;">ubuntu</a>
+<a href="http://www.flakor.cn/tag/viewgroup" class="tag-link-12" title="1个话题" style="font-size: 8pt;">viewgroup</a>
+<a href="http://www.flakor.cn/tag/vim" class="tag-link-45" title="1个话题" style="font-size: 8pt;">vim</a>
+<a href="http://www.flakor.cn/tag/webstorm" class="tag-link-23" title="1个话题" style="font-size: 8pt;">webstorm</a>
+<a href="http://www.flakor.cn/tag/%e9%be%99%e6%ba%90%e5%bd%95%ef%bc%8c%e5%b0%8f%e8%af%b4" class="tag-link-41" title="1个话题" style="font-size: 8pt;">龙源录，小说</a></div>
+</aside><aside id="text-2" class="widget widget_text"><h3 class="widget-title">淘宝推荐</h3>			<div class="textwidget"><script type="text/javascript"> (function(win,doc){ var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_34968762_5346492_17810701",/*推广单元ID，用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window,document);</script>
+<tkbox id="tk_box_1" style="border: 1px solid rgb(217, 217, 217); text-indent: 0px; display: block; width: 265px; height: 240px;"><iframe id="writeable_iframe_0" width="265" height="240" style="" border="0" frameborder="0" scrolling="no" marginwidth="0" allowtransparency="true" marginheight="0"></iframe></tkbox><a data-type="3" data-tmpl="265x240" data-tmplid="182" data-rd="2" data-style="2" data-border="1" href="http://www.flakor.cn/2014-05-16-409.html#" _tk_rb_index="1" _tk_old_display="inline" style="display: none;"></a></div>
+		</aside><aside id="text-3" class="widget widget_text"><h3 class="widget-title">1号店</h3>			<div class="textwidget"><iframe id="f" width="265px" height="450px" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/viewRanking.html" frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes" scrolling="NO"> </iframe></div>
+		</aside>
+</div><!-- #secondary --></div><!-- #container -->
+
+
+	   </div><!-- #main -->
+
+	   
+	   	
+	   
+	   <footer id="footerarea" class="clearfix">
+			
+
+
+<div id="site-generator">
+				<div class="container"><div class="copyright">Copyright © 2013-2016 <a href="http://www.flakor.cn/" title="飞客日志"><span>飞客日志</span></a>  </div><!-- .copyright --><div class="footer-right"><a href="http://www.miitbeian.gov.cn/" target="_blank" title="ICP"><span>浙ICP备13029043号</span></a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5750914'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s6.cnzz.com/stat.php%3Fid%3D5750914%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_5750914"><a href="http://www.cnzz.com/stat/website.php?web_id=5750914" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/pic1.gif"></a></span><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/stat.php" type="text/javascript"></script><script src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/core.php" charset="utf-8" type="text/javascript"></script></div><div style="clear:both;"></div>
+			</div><!-- .container -->
+			</div><!-- #site-generator --><div class="back-to-top" style="display: block; opacity: 0.941883;"><a href="http://www.flakor.cn/2014-05-16-409.html#branding"></a></div>		</footer>
+	   
+			
+
+	</div><!-- .wrapper -->
+
+	 
+
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/form.js"></script>
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/shCore.js"></script>
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/shBrushPlain.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.flakor.cn/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.flakor.cn/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '帮助';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '无法找到Brush：';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush不能设置 html-script选项';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="./opengl es 2.0 3.0 MVP矩阵计算 _ 飞客日志_files/comment-reply.min.js"></script>
+
+
+</body></html>
