@@ -8,6 +8,7 @@
 
 The reason for implement as private inheritance is to hide some interface call by CCDirector.
 */
+class CCScene;
 class GameLayer;
 class  AppDelegate : private cocos2d::CCApplication
 {

@@ -7,6 +7,10 @@
 #include "mini_hammerDoc.h"
 #include "mini_hammerView.h"
 
+#include "TopView.h"
+#include "SideView.h"
+#include "FrontView.h"
+
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -154,26 +158,19 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 {
-	CFrameWndEx::OnCreateClient(lpcs, pContext);
-
 	CRect rc;
 	GetClientRect(&rc);
 
-	/*if(m_wndSplitter.CreateStatic(this, 1, 2) == NULL)
+	if(m_wndSplitter.CreateStatic(this, 2, 2) == NULL)
 	{
-	return FALSE;
+		return FALSE;
 	}
 
-	m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(Cmini_hammerView), CSize(rc.Width() / 2, rc.Height()), pContext);
+	m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(Cmini_hammerView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);
+	m_wndSplitter.CreateView(0, 1, RUNTIME_CLASS(SideView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);
 
-	if(m_wndSplitterSub.CreateStatic(&m_wndSplitter, 2, 1, WS_CHILD|WS_VISIBLE, 
-	m_wndSplitter.IdFromRowCol(0, 1)) == NULL)
-	{
-	return FALSE;
-	}
-
-	m_wndSplitterSub.CreateView(0, 0, RUNTIME_CLASS(CmediaView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);
-	m_wndSplitterSub.CreateView(1, 0, RUNTIME_CLASS(CbehaviorView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);*/
+	m_wndSplitter.CreateView(1, 0, RUNTIME_CLASS(TopView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);
+	m_wndSplitter.CreateView(1, 1, RUNTIME_CLASS(FrontView), CSize(rc.Width() / 2, rc.Height() / 2), pContext);
 
 	return TRUE;
 }

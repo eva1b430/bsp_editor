@@ -10,6 +10,7 @@
 #include "CCEGLView.h"
 #include "CCApplication.h"
 #include "AppDelegate.h"
+#include "GameLayer.h"
 
 using namespace cocos2d;
 
@@ -290,8 +291,15 @@ void Cmini_hammerView::OnSize(UINT nType, int cx, int cy)
 		CRect   tClientRect;
 		GetClientRect(&tClientRect);
 		//重新设置窗口大小及投影矩阵  
-		CCEGLView::sharedOpenGLView()->resize(tClientRect.Width(),tClientRect.Height());
-		CCDirector::sharedDirector()->reshapeProjection(CCSizeMake(tClientRect.Width(),tClientRect.Height()));
+		//CCEGLView::sharedOpenGLView()->resize(tClientRect.Width(),tClientRect.Height());
+		//CCDirector::sharedDirector()->reshapeProjection(CCSizeMake(tClientRect.Width(),tClientRect.Height()));
+
+		if (m_bInitCocos2dX)
+		{
+			CCDirector::sharedDirector()->getRunningScene()->setContentSize(CCSizeMake(tClientRect.Width(),tClientRect.Height()));
+			app.getGameLayer()->setContentSize(CCSizeMake(tClientRect.Width(),tClientRect.Height()));
+		}
+
 	}
 }
 

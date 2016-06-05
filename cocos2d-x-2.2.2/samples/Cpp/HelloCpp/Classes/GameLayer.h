@@ -8,7 +8,7 @@ using namespace std;
 using namespace cocos2d;
 class BSPCompiler;
 class Sprite3D;
-class GameLayer : public cocos2d::CCLayer
+class GameLayer : public cocos2d::CCLayerColor
 {
 public:
 	GameLayer();
@@ -33,8 +33,8 @@ public:
 	virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
 
 private:
-	BSPCompiler*	m_pBSP;
-	Sprite3D*		m_pVehicle;
+// 	BSPCompiler*	m_pBSP;
+// 	Sprite3D*		m_pVehicle;
 };
 
 #endif // __GAME_LAYER_H__

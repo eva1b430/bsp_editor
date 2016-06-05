@@ -38,7 +38,6 @@ protected:  // control bar embedded members
 	CMFCToolBarImages	m_UserImages;
 	// 拆分窗口的对象
 	CSplitterWnd		m_wndSplitter;
-	CSplitterWnd		m_wndSplitterSub;
 
 // Generated message map functions
 protected:

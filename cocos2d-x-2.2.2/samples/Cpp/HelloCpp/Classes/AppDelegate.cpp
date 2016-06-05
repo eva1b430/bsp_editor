@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "GameLayer.h"
 #include "Sprite3D.h"
 #include "AppMacros.h"
-#include "BSPCompiler.h"
+
 
 USING_NS_CC;
 using namespace std;
@@ -52,22 +52,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
 
-	// 	pDirector->getScheduler()->scheduleUpdateForTarget(m_pFrameDispatcher, 0, false);
-
 	pDirector->setOpenGLView(pEGLView);
-
-	// turn on display FPS
 	pDirector->setDisplayStats(true);
-
-	// set FPS. the default value is 1.0/60 if you don't call this
 	pDirector->setAnimationInterval(1.0 / 60);
 
-	pEGLView->setDesignResolutionSize(800, 600, kResolutionShowAll);
+	//pEGLView->setDesignResolutionSize(800, 600, kResolutionShowAll);
 
     // create a scene. it's an autorelease object
-    CCScene *pScene = CCScene::create();
+	cocos2d::CCScene* pGameScene = cocos2d::CCScene::create();
 	m_pLayer3D = GameLayer::create();
-	pScene->addChild(m_pLayer3D);
+	pGameScene->addChild(m_pLayer3D);
+
+	Sprite3D* pCube = Sprite3D::create();
+	m_pLayer3D->addChild(pCube);
+	pCube->setScale3D(10.0f);
+	pCube->setPosition3D(40.f, 40.0f, 0.0f);
 
 	//Sprite3D* pSprite3D = Sprite3D::create();
 	//pLayer->addChild(pSprite3D);
@@ -95,7 +94,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//pSprite->setScale(0.6f);
 
     // run
-    pDirector->runWithScene(pScene);
+    pDirector->runWithScene(pGameScene);
 
     return true;
 }
