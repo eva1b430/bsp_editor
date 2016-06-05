@@ -70,6 +70,7 @@ Sprite3D::Sprite3D()
 	, m_rotationOffset(0.0f)
 	, m_rotationOffsetMax(0.0f)
 	, m_vecDirection(Vector3D())
+	, m_bIs2D(false)
 {
 	kmMat4Identity(&m_moveMatrix);
 	kmMat4Identity(&m_rotMatrix);
@@ -225,93 +226,190 @@ Sprite3D* Sprite3D::create( void )
 // 所以，构造的矩阵应该是 P（观察）* V（相机）* [  T（平移） * R（旋转） * S（缩放） ]（模型） 
 void Sprite3D::draw( void )
 {
-	// 开启深度测试
-	glEnable(GL_DEPTH_TEST);
+	// 开启线框模式
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	// 绘制部分
-	m_glProgram->use();
-	m_glProgram->setUniformsForBuiltins();
-
-	// 参考在shader
-	// gl_Position = Modelview * vec4(a_position.xyz, 1);
-	//////////////////////////////////////////////////////////////////////////
-	// 定义model
-	// 缩放
-	/*
-	【kmMat4 scaleMatrix;kmMat4Identity(&scaleMatrix);
-	//kmMat4Scaling(&scaleMatrix, 0.1f, 0.1f, 0.1f);
-	// 旋转
-	kmMat4 rotMatrix;kmMat4Identity(&rotMatrix);
-	static float rotation = 0;
-	kmVec3 axis;
-	kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
-	kmMat4RotationAxisAngle(&rotMatrix, &axis, CC_DEGREES_TO_RADIANS(rotation));
-	rotation += 1.0f;
-	if (rotation > 360.0f)
+	if (m_bIs2D)
 	{
+		// 关闭深度测试
+		//glDisable(GL_DEPTH_TEST);
+
+		// 绘制部分
+		m_glProgram->use();
+		m_glProgram->setUniformsForBuiltins();
+
+		// 参考在shader
+		// gl_Position = Modelview * vec4(a_position.xyz, 1);
+		//////////////////////////////////////////////////////////////////////////
+		// 定义model
+		// 缩放
+		/*
+		【kmMat4 scaleMatrix;kmMat4Identity(&scaleMatrix);
+		//kmMat4Scaling(&scaleMatrix, 0.1f, 0.1f, 0.1f);
+		// 旋转
+		kmMat4 rotMatrix;kmMat4Identity(&rotMatrix);
+		static float rotation = 0;
+		kmVec3 axis;
+		kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
+		kmMat4RotationAxisAngle(&rotMatrix, &axis, CC_DEGREES_TO_RADIANS(rotation));
+		rotation += 1.0f;
+		if (rotation > 360.0f)
+		{
 		rotation = 0.0f;
+		}
+		// 平移
+		kmMat4 moveMatrix;kmMat4Identity(&moveMatrix);
+		kmMat4Translation(&moveMatrix, 0.0f, 0.0f, 1.0f);】
+		*/
+
+		kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
+
+		//////////////////////////////////////////////////////////////////////////
+		// 定义view
+		kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
+		kmVec3 eye, center, up;
+		// 第一组eyex, eyey,eyez 相机在世界坐标的位置
+		// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
+		// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
+		CCSize size = CCDirector::sharedDirector()->getWinSize();
+		//kmVec3Fill(&eye, 0.0f, 0.0f, 20.0f);
+		//kmVec3Fill(&center, 0.0f, 0.0f, 0.0f);
+		//kmVec3Fill(&up, 0.0f, 1.0f, 0.0f);
+		float zeye = CCDirector::sharedDirector()->getZEye();
+		kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
+		kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
+		kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
+		kmMat4LookAt(&viewMatrix, &eye, &center, &up);
+
+		//////////////////////////////////////////////////////////////////////////
+		// 构造MVP
+		// MV矩阵
+		kmMat4 matrixMV;kmMat4Identity(&matrixMV);
+		kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
+
+		// MVP矩阵
+		kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
+		kmMat4 matrixP;kmMat4Identity(&matrixP);
+		kmMat4OrthographicProjection(&matrixP, 0, size.width, 0, size.height, -1024, 1024 );
+		//kmGLGetMatrix(KM_GL_PROJECTION, &matrixP);
+		kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
+
+		//////////////////////////////////////////////////////////////////////////
+		GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
+		m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
+
+		glBindVertexArray(m_uVao);
+		// uniform
+		//GLuint uColorLocation = glGetUniformLocation(m_glProgram->getProgram(), "u_color");
+		//float uColor[] = {1.0, 1.0, 0.6, 1.0};
+		//glUniform4fv(uColorLocation, 1, uColor);
+		ccGLBindTexture2D(m_pTexture->getTexture()->getName());
+
+		// 36 = 12 * 3（12个三角形，每个三角形需要3个顶点）
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		// 必须这么做，否则2D元素不显示，因为openGL变化是一个“马尔科夫变化”
+		//kmGLPushMatrix();
+		//kmGLLoadIdentity();
+		//kmGLPopMatrix();
+
+		// 开启深度测试
+		//glEnable(GL_DEPTH_TEST);
 	}
-	// 平移
-	kmMat4 moveMatrix;kmMat4Identity(&moveMatrix);
-	kmMat4Translation(&moveMatrix, 0.0f, 0.0f, 1.0f);】
-	*/
+	else
+	{
+		// 开启深度测试
+		glEnable(GL_DEPTH_TEST);
 
-	kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
-	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
-	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
-	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
+		// 绘制部分
+		m_glProgram->use();
+		m_glProgram->setUniformsForBuiltins();
 
-	//////////////////////////////////////////////////////////////////////////
-	// 定义view
-	kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
-	kmVec3 eye, center, up;
-	// 第一组eyex, eyey,eyez 相机在世界坐标的位置
-	// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
-	// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
-	CCSize size = CCDirector::sharedDirector()->getWinSize();
-	//kmVec3Fill(&eye, 0.0f, 0.0f, 20.0f);
-	//kmVec3Fill(&center, 0.0f, 0.0f, 0.0f);
-	//kmVec3Fill(&up, 0.0f, 1.0f, 0.0f);
-	float zeye = CCDirector::sharedDirector()->getZEye();
-	kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
-	kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
-	kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
-	kmMat4LookAt(&viewMatrix, &eye, &center, &up);
+		// 参考在shader
+		// gl_Position = Modelview * vec4(a_position.xyz, 1);
+		//////////////////////////////////////////////////////////////////////////
+		// 定义model
+		// 缩放
+		/*
+		【kmMat4 scaleMatrix;kmMat4Identity(&scaleMatrix);
+		//kmMat4Scaling(&scaleMatrix, 0.1f, 0.1f, 0.1f);
+		// 旋转
+		kmMat4 rotMatrix;kmMat4Identity(&rotMatrix);
+		static float rotation = 0;
+		kmVec3 axis;
+		kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
+		kmMat4RotationAxisAngle(&rotMatrix, &axis, CC_DEGREES_TO_RADIANS(rotation));
+		rotation += 1.0f;
+		if (rotation > 360.0f)
+		{
+		rotation = 0.0f;
+		}
+		// 平移
+		kmMat4 moveMatrix;kmMat4Identity(&moveMatrix);
+		kmMat4Translation(&moveMatrix, 0.0f, 0.0f, 1.0f);】
+		*/
 
-	//////////////////////////////////////////////////////////////////////////
-	// 构造MVP
-	// MV矩阵
-	kmMat4 matrixMV;kmMat4Identity(&matrixMV);
-	kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
+		kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
+		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
 
-	// MVP矩阵
-	kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
-	kmMat4 matrixP;kmMat4Identity(&matrixP);
-	kmGLGetMatrix(KM_GL_PROJECTION, &matrixP);
-	kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
+		//////////////////////////////////////////////////////////////////////////
+		// 定义view
+		kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
+		kmVec3 eye, center, up;
+		// 第一组eyex, eyey,eyez 相机在世界坐标的位置
+		// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
+		// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
+		CCSize size = CCDirector::sharedDirector()->getWinSize();
+		//kmVec3Fill(&eye, 0.0f, 0.0f, 20.0f);
+		//kmVec3Fill(&center, 0.0f, 0.0f, 0.0f);
+		//kmVec3Fill(&up, 0.0f, 1.0f, 0.0f);
+		float zeye = CCDirector::sharedDirector()->getZEye();
+		kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
+		kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
+		kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
+		kmMat4LookAt(&viewMatrix, &eye, &center, &up);
 
-	//////////////////////////////////////////////////////////////////////////
-	GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
-	m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
-	
-	glBindVertexArray(m_uVao);
-	// uniform
-	//GLuint uColorLocation = glGetUniformLocation(m_glProgram->getProgram(), "u_color");
-	//float uColor[] = {1.0, 1.0, 0.6, 1.0};
-	//glUniform4fv(uColorLocation, 1, uColor);
-	ccGLBindTexture2D(m_pTexture->getTexture()->getName());
+		//////////////////////////////////////////////////////////////////////////
+		// 构造MVP
+		// MV矩阵
+		kmMat4 matrixMV;kmMat4Identity(&matrixMV);
+		kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
 
-	// 36 = 12 * 3（12个三角形，每个三角形需要3个顶点）
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
+		// MVP矩阵
+		kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
+		kmMat4 matrixP;kmMat4Identity(&matrixP);
+		kmGLGetMatrix(KM_GL_PROJECTION, &matrixP);
+		kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
 
-	// 必须这么做，否则2D元素不显示，因为openGL变化是一个“马尔科夫变化”
-	//kmGLPushMatrix();
-	//kmGLLoadIdentity();
-	//kmGLPopMatrix();
+		//////////////////////////////////////////////////////////////////////////
+		GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
+		m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
 
-	// 关闭深度测试
-	glDisable(GL_DEPTH_TEST);
+		glBindVertexArray(m_uVao);
+		// uniform
+		//GLuint uColorLocation = glGetUniformLocation(m_glProgram->getProgram(), "u_color");
+		//float uColor[] = {1.0, 1.0, 0.6, 1.0};
+		//glUniform4fv(uColorLocation, 1, uColor);
+		ccGLBindTexture2D(m_pTexture->getTexture()->getName());
+
+		// 36 = 12 * 3（12个三角形，每个三角形需要3个顶点）
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		// 必须这么做，否则2D元素不显示，因为openGL变化是一个“马尔科夫变化”
+		//kmGLPushMatrix();
+		//kmGLLoadIdentity();
+		//kmGLPopMatrix();
+
+		// 关闭深度测试
+		glDisable(GL_DEPTH_TEST);
+	}
 }
 
 void Sprite3D::setPosition3D( float x, float y, float z )

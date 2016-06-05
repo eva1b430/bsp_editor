@@ -47,6 +47,11 @@ public:
 	void runMove3D(Vector3D vecDirection);
 	void updateMove3D(float dt);
 
+	void set2DEnable(bool bEnable)
+	{
+		m_bIs2D = bEnable;
+	}
+
 private:
 	CCGLProgram*	m_glProgram;
 
@@ -71,6 +76,9 @@ private:
 
 	std::vector<Vertex3D>	m_vertexList;
 	std::vector<int>		m_indexList;
+
+	// 是否为正交投影
+	bool		m_bIs2D;
 };
 
 #endif // __SPRITE3D_H__
