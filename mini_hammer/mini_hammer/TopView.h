@@ -32,6 +32,10 @@ private:
 	void DrawGrid();
 	// 绘制视图其他信息
 	void DrawViewInfo();
+	// 创建cocos窗口
+	BOOL CreateCocos2dXWindow();
+public:
+	virtual void OnInitialUpdate();
 };
 
 

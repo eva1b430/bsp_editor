@@ -6,8 +6,11 @@
 #include "TopView.h"
 #include "memdc.h"
 #include "misc/Cgdi.h"
+#include "cocos2d.h"
+#include "CCEGLView.h"
 
 
+using namespace cocos2d;
 // TopView
 
 IMPLEMENT_DYNCREATE(TopView, CView)
@@ -112,8 +115,32 @@ void TopView::DrawViewInfo()
 	gdi->TextAtPos(2, 0, "Top");
 }
 
+BOOL TopView::CreateCocos2dXWindow()
+{
+	// 新建一个CRect变量获取窗口的客户区大小
+	CRect   tClientRect;
+	GetClientRect(&tClientRect);
+	// 取得使用的OpenGL视窗
+	//CCEGLView* eglView = CCEGLView::sharedOpenGLView();
+	//CCEGLView* eglView = new CCEGLView;
+	// 以指定的客户区大小创建视窗，这里我们对setFrameSize增加了参数3以传入当前控件的窗口句柄
+	//eglView->setFrameSize(tClientRect.Width(), tClientRect.Height(), GetSafeHwnd());
+
+
+	return TRUE;
+}
+
 #endif
 #endif //_DEBUG
 
 
 // TopView 消息处理程序
+
+
+void TopView::OnInitialUpdate()
+{
+	//CView::OnInitialUpdate();
+
+	// TODO: Add your specialized code here and/or call the base class
+	CreateCocos2dXWindow();
+}

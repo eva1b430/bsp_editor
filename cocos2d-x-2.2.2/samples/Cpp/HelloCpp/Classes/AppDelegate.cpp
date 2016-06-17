@@ -66,8 +66,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	Sprite3D* pCube = Sprite3D::create();
 	m_pLayer3D->addChild(pCube);
 	pCube->set2DEnable(true);
-	pCube->setScale3D(4000.0f);
-	pCube->setPosition3D(80.f, 80.0f, 0.0f);
+	pCube->setScale3D(20.0f);
+	pCube->setPosition3D(400.f, 200.0f, 0.0f);
 
 	//Sprite3D* pSprite3D = Sprite3D::create();
 	//pLayer->addChild(pSprite3D);
