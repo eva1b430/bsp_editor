@@ -100,7 +100,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /Q "$(OutDir)$(ProjectName).dll" "../../../workplace"</Command>
+      <Command>xcopy /Y /Q "$(OutDir)$(ProjectName).dll" "../../../workplace"
+xcopy /Y /Q "$(OutDir)$(ProjectName).pdb" "../../../workplace"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
