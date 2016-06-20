@@ -195,6 +195,11 @@ CCEGLView::~CCEGLView()
 
 }
 
+void CCEGLView::Activate()
+{
+	wglMakeCurrent(m_hDC, m_hRC);
+}
+
 bool CCEGLView::initGL()
 {
     m_hDC = GetDC(m_hWnd);

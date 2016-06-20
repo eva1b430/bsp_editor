@@ -227,8 +227,8 @@ Sprite3D* Sprite3D::create( void )
 void Sprite3D::draw( void )
 {
 	// 开启线框模式
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glLineWidth(2.0f);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glLineWidth(2.0f);
 
 	if (m_bIs2D)
 	{

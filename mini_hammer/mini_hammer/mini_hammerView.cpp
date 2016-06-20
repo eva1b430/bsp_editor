@@ -252,6 +252,11 @@ void Cmini_hammerView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
 	//我们写一个renderWorld函数代表Cocos2d-x的世界渲染  
+	CCEGLView* eglView = CCEGLView::sharedOpenGLView();
+	eglView->Activate();
+
+	glPolygonMode(GL_NONE, GL_LINE);
+
 	cocos2d::CCApplication::sharedApplication()->renderWorld();
 	//CWnd::OnTimer(nIDEvent);
 
