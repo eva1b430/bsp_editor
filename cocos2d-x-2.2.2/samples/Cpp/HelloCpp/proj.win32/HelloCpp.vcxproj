@@ -82,7 +82,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glew32.lib;libcocos2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <OutputFile>../../../../../workplace/HelloCpp.exe</OutputFile>
       <AdditionalLibraryDirectories>../../../../../workplace;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>

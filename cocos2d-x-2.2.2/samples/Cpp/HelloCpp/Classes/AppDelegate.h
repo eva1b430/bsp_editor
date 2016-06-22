@@ -40,8 +40,13 @@ public:
 		return m_pLayer3D;
 	}
 
+	void enable2D(){ m_bEnable2D = true; }
+	void disable2D(){ m_bEnable2D = false; }
+	bool is2DMode(){ return m_bEnable2D; }
+
 private:
 	GameLayer*	m_pLayer3D;
+	bool		m_bEnable2D;
 };
 
 #endif // _APP_DELEGATE_H_

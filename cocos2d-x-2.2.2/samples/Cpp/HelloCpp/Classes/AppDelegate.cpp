@@ -37,6 +37,7 @@ using namespace std;
 
 AppDelegate::AppDelegate()
 	: m_pLayer3D(NULL)
+	, m_bEnable2D(false)
 {
 
 }
@@ -65,34 +66,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	Sprite3D* pCube = Sprite3D::create();
 	m_pLayer3D->addChild(pCube);
-	pCube->set2DEnable(true);
 	pCube->setScale3D(20.0f);
-	pCube->setPosition3D(400.f, 200.0f, 0.0f);
-
-	//Sprite3D* pSprite3D = Sprite3D::create();
-	//pLayer->addChild(pSprite3D);
-	//pSprite3D->setPosition3D(3.0f, 3.0f, 0.0f);
-	//kmVec3 axis;
-	//kmVec3Fill(&axis, 1.0f, 0.0f, 0.0f);
-	//pSprite3D->runRotation(axis, 180.0f);
-
-	//Sprite3D* pSprite3D2 = Sprite3D::create();
-	//pLayer->addChild(pSprite3D2);
-	//pSprite3D2->setPosition3D(-3.0f, 3.0f, 0.0f);
-	//kmVec3Fill(&axis, 0.0f, 0.0f, 1.0f);
-	//pSprite3D2->runRotationFoever(axis);
-
-	//Sprite3D* pSprite3D3 = Sprite3D::create();
-	//pLayer->addChild(pSprite3D3);
-	//pSprite3D3->setPosition3D(0.0f, 0.0f, 0.0f);
-	//pSprite3D3->setRotX3D(30);
-	//kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
-	//pSprite3D3->runRotationFoever(axis);
-
-	//CCSprite* pSprite = CCSprite::create("Texture/coin.png");
-	//pLayer->addChild(pSprite);
-	//pSprite->setPosition(ccp(400.0f, 300.0f));
-	//pSprite->setScale(0.6f);
+	pCube->setPosition3D(100.f, 100.0f, 0.0f);
 
     // run
     pDirector->runWithScene(pGameScene);

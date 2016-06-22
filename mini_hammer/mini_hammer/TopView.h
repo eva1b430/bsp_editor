@@ -1,6 +1,5 @@
 #pragma once
 
-
 // TopView йсм╪
 
 class TopView : public CView

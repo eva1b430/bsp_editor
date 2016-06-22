@@ -45,22 +45,22 @@ void TopView::OnDraw(CDC* pDC)
 	CDocument* pDoc = GetDocument();
 	
 	// TODO: 在此添加绘制代码
-	CMemoryDC *pMemDC = NULL;
-	pDC = pMemDC = new CMemoryDC(pDC);
+	//CMemoryDC *pMemDC = NULL;
+	//pDC = pMemDC = new CMemoryDC(pDC);
 
-	RECT rect;
-	GetClientRect(&rect);
-	int nWidth = rect.right;
-	int nHeight = rect.bottom;
+	//RECT rect;
+	//GetClientRect(&rect);
+	//int nWidth = rect.right;
+	//int nHeight = rect.bottom;
 
-	pMemDC->FillSolidRect(0, 0, nWidth, nHeight, RGB(255, 255, 255));
-	gdi->StartDrawing(pDC->GetSafeHdc());
+	//pMemDC->FillSolidRect(0, 0, nWidth, nHeight, RGB(255, 255, 255));
+	//gdi->StartDrawing(pDC->GetSafeHdc());
 
-	DrawGrid();
-	DrawViewInfo();
+	//DrawGrid();
+	//DrawViewInfo();
 
-	gdi->StopDrawing(pDC->GetSafeHdc());
-	delete pMemDC;
+	//gdi->StopDrawing(pDC->GetSafeHdc());
+	//delete pMemDC;
 
 	return ;
 }
@@ -82,8 +82,6 @@ void TopView::Dump(CDumpContext& dc) const
 
 void TopView::DrawGrid()
 {
-	return ;
-
 	RECT rect;
 	GetClientRect(&rect);
 	int nWidth = rect.right;
@@ -144,17 +142,12 @@ void TopView::DrawViewInfo()
 
 void TopView::OnInitialUpdate()
 {
-	CView::OnInitialUpdate();
+	//CView::OnInitialUpdate();
 
-	// TODO: Add your specialized code here and/or call the base class
 	m_hWnd = GetSafeHwnd();
 	m_hDC = ::GetDC(m_hWnd);
-	//m_hDC = GetDC()->GetSafeHdc();
-	//SetupPixelFormat(m_hDC);
-	//SetupPalette();
 
 	int pixelFormat;
-
 	PIXELFORMATDESCRIPTOR pfd =
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),  // size
@@ -183,63 +176,7 @@ void TopView::OnInitialUpdate()
 	m_hRC = wglCreateContext(m_hDC);
 	wglMakeCurrent(m_hDC, m_hRC);
 
-	GLenum GlewInitResult = glewInit();
-
-	const char *gl_extensions = (const char*)glGetString(GL_EXTENSIONS);
-	if (glGenFramebuffers == NULL)
-	{
-		if (strstr(gl_extensions, "ARB_framebuffer_object"))
-		{
-			glIsRenderbuffer = (PFNGLISRENDERBUFFERPROC) wglGetProcAddress("glIsRenderbuffer");
-			glBindRenderbuffer = (PFNGLBINDRENDERBUFFERPROC) wglGetProcAddress("glBindRenderbuffer");
-			glDeleteRenderbuffers = (PFNGLDELETERENDERBUFFERSPROC) wglGetProcAddress("glDeleteRenderbuffers");
-			glGenRenderbuffers = (PFNGLGENRENDERBUFFERSPROC) wglGetProcAddress("glGenRenderbuffers");
-			glRenderbufferStorage = (PFNGLRENDERBUFFERSTORAGEPROC) wglGetProcAddress("glRenderbufferStorage");
-			glGetRenderbufferParameteriv = (PFNGLGETRENDERBUFFERPARAMETERIVPROC) wglGetProcAddress("glGetRenderbufferParameteriv");
-			glIsFramebuffer = (PFNGLISFRAMEBUFFERPROC) wglGetProcAddress("glIsFramebuffer");
-			glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC) wglGetProcAddress("glBindFramebuffer");
-			glDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSPROC) wglGetProcAddress("glDeleteFramebuffers");
-			glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC) wglGetProcAddress("glGenFramebuffers");
-			glCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSPROC) wglGetProcAddress("glCheckFramebufferStatus");
-			glFramebufferTexture1D = (PFNGLFRAMEBUFFERTEXTURE1DPROC) wglGetProcAddress("glFramebufferTexture1D");
-			glFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DPROC) wglGetProcAddress("glFramebufferTexture2D");
-			glFramebufferTexture3D = (PFNGLFRAMEBUFFERTEXTURE3DPROC) wglGetProcAddress("glFramebufferTexture3D");
-			glFramebufferRenderbuffer = (PFNGLFRAMEBUFFERRENDERBUFFERPROC) wglGetProcAddress("glFramebufferRenderbuffer");
-			glGetFramebufferAttachmentParameteriv = (PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC) wglGetProcAddress("glGetFramebufferAttachmentParameteriv");
-			glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) wglGetProcAddress("glGenerateMipmap");
-		}
-		else
-			if (strstr(gl_extensions, "EXT_framebuffer_object"))
-			{
-				glIsRenderbuffer = (PFNGLISRENDERBUFFERPROC) wglGetProcAddress("glIsRenderbufferEXT");
-				glBindRenderbuffer = (PFNGLBINDRENDERBUFFERPROC) wglGetProcAddress("glBindRenderbufferEXT");
-				glDeleteRenderbuffers = (PFNGLDELETERENDERBUFFERSPROC) wglGetProcAddress("glDeleteRenderbuffersEXT");
-				glGenRenderbuffers = (PFNGLGENRENDERBUFFERSPROC) wglGetProcAddress("glGenRenderbuffersEXT");
-				glRenderbufferStorage = (PFNGLRENDERBUFFERSTORAGEPROC) wglGetProcAddress("glRenderbufferStorageEXT");
-				glGetRenderbufferParameteriv = (PFNGLGETRENDERBUFFERPARAMETERIVPROC) wglGetProcAddress("glGetRenderbufferParameterivEXT");
-				glIsFramebuffer = (PFNGLISFRAMEBUFFERPROC) wglGetProcAddress("glIsFramebufferEXT");
-				glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC) wglGetProcAddress("glBindFramebufferEXT");
-				glDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSPROC) wglGetProcAddress("glDeleteFramebuffersEXT");
-				glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC) wglGetProcAddress("glGenFramebuffersEXT");
-				glCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSPROC) wglGetProcAddress("glCheckFramebufferStatusEXT");
-				glFramebufferTexture1D = (PFNGLFRAMEBUFFERTEXTURE1DPROC) wglGetProcAddress("glFramebufferTexture1DEXT");
-				glFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DPROC) wglGetProcAddress("glFramebufferTexture2DEXT");
-				glFramebufferTexture3D = (PFNGLFRAMEBUFFERTEXTURE3DPROC) wglGetProcAddress("glFramebufferTexture3DEXT");
-				glFramebufferRenderbuffer = (PFNGLFRAMEBUFFERRENDERBUFFERPROC) wglGetProcAddress("glFramebufferRenderbufferEXT");
-				glGetFramebufferAttachmentParameteriv = (PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC) wglGetProcAddress("glGetFramebufferAttachmentParameterivEXT");
-				glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) wglGetProcAddress("glGenerateMipmapEXT");
-			}
-			else
-			{
-				
-			}
-	}
-
-	glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
-
 	SetTimer(2, 1, NULL);
-
-	// Destroy is Need
 }
 
 void TopView::Activate()
@@ -249,7 +186,7 @@ void TopView::Activate()
 
 bool TopView::IsActive()
 {
-	return (wglGetCurrentDC()==m_hDC);
+	return (wglGetCurrentDC() == m_hDC);
 }
 
 
@@ -267,13 +204,8 @@ void TopView::OnTimer(UINT_PTR nIDEvent)
 {
 	Activate();
 
-	kmGLPushMatrix();
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glLineWidth(2.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	// 绘制逻辑
+	app.enable2D();
 	GameLayer* pLayer3D = app.getGameLayer();
 	CCArray* pChildren = pLayer3D->getChildren();
 	for (int i = 0; i < pChildren->count(); i++)
@@ -283,20 +215,15 @@ void TopView::OnTimer(UINT_PTR nIDEvent)
 			CCSprite* p3DSprite = dynamic_cast<CCSprite*>(pChildren->objectAtIndex(i));
 			if (p3DSprite)
 			{
-				//p3DSprite->draw();
+				p3DSprite->draw();
 			}
 		}
 	}
 
-	kmGLPopMatrix();
-
 	// 交换缓冲区数据
 	::SwapBuffers(m_hDC);
 
-	//CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-	//eglView->Activate();
-
-	//CView::OnTimer(nIDEvent);
+	CView::OnTimer(nIDEvent);
 }
 
 
