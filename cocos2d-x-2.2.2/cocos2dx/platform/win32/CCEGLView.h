@@ -85,7 +85,6 @@ public:
     @brief    get the shared main open gl window
     */
     static CCEGLView* sharedOpenGLView();
-	void Activate();
 
 protected:
 	static CCEGLView* s_pEglView;

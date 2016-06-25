@@ -35,20 +35,20 @@ bool GameLayer::init()
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 
 	// ÄÚ´æÐ¹Â¶
-// 	m_pBSP = new BSPCompiler;
-// 	m_pBSP->addToCCNode(this);
-// 
-// 	m_pVehicle = Sprite3D::create();
-// 	Vertex3D pos3D = m_pBSP->getRootPosition3D();
-// 	addChild(m_pVehicle);
-// 	m_pVehicle->setPosition3D(pos3D.Position[0], pos3D.Position[1], pos3D.Position[2]);
-// 	m_pVehicle->setScale3D(10.0f);
-// 	m_pVehicle->setRotX3D(90.0f);
-// 	m_pVehicle->setPosition3D(winSize.width / 2, winSize.height / 2, 0.0f);
-// 
-// 	kmVec3 axis;
-// 	kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
-// 	m_pVehicle->runRotationFoever(axis);
+ 	m_pBSP = new BSPCompiler;
+ 	m_pBSP->addToCCNode(this);
+ 
+	m_pVehicle = Sprite3D::create();
+	Vertex3D pos3D = m_pBSP->getRootPosition3D();
+	addChild(m_pVehicle);
+	m_pVehicle->setPosition3D(pos3D.Position[0], pos3D.Position[1], pos3D.Position[2]);
+	m_pVehicle->setScale3D(10.0f);
+	m_pVehicle->setRotX3D(90.0f);
+	m_pVehicle->setPosition3D(winSize.width / 2, winSize.height / 2, 0.0f);
+
+	kmVec3 axis;
+	kmVec3Fill(&axis, 1.0f, 1.0f, 1.0f);
+	m_pVehicle->runRotationFoever(axis);
 	
     return true;
 }
@@ -86,13 +86,13 @@ void GameLayer::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
 
 void GameLayer::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
 {
-// 	if (!m_pVehicle)
-// 	{
-// 		return ;
-// 	}
-// 
-// 	//CCPoint pos = CCDirector::sharedDirector()->convertToGL(pTouch->getLocation());
-// 
-// 	CCPoint pos = pTouch->getLocation();
-// 	m_pVehicle->setPosition3D(pos.x, pos.y, 2.0f);
+ 	if (!m_pVehicle)
+ 	{
+ 		return ;
+ 	}
+ 
+ 	//CCPoint pos = CCDirector::sharedDirector()->convertToGL(pTouch->getLocation());
+ 
+ 	CCPoint pos = pTouch->getLocation();
+ 	m_pVehicle->setPosition3D(pos.x, pos.y, 2.0f);
 }

@@ -37,7 +37,6 @@ using namespace std;
 
 AppDelegate::AppDelegate()
 	: m_pLayer3D(NULL)
-	, m_bEnable2D(false)
 {
 
 }

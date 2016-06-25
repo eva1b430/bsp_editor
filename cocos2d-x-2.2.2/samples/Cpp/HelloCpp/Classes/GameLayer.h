@@ -33,8 +33,8 @@ public:
 	virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
 
 private:
-// 	BSPCompiler*	m_pBSP;
-// 	Sprite3D*		m_pVehicle;
+	BSPCompiler*	m_pBSP;
+	Sprite3D*		m_pVehicle;
 };
 
 #endif // __GAME_LAYER_H__

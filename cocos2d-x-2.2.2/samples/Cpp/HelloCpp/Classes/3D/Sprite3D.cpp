@@ -227,116 +227,65 @@ Sprite3D* Sprite3D::create( void )
 extern AppDelegate app;
 void Sprite3D::draw( void )
 {
-	if (app.is2DMode())
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glLineWidth(2.0f);
+	CCEGLView* eglView = CCEGLView::sharedOpenGLView();
 
-		m_glProgram->use();
-		m_glProgram->setUniformsForBuiltins();
+	// 开启深度测试
+	glEnable(GL_DEPTH_TEST);
 
-		kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		//////////////////////////////////////////////////////////////////////////
-		// 定义view
-		kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
-		kmVec3 eye, center, up;
-		// 第一组eyex, eyey,eyez 相机在世界坐标的位置
-		// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
-		// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
-		CCSize size = CCDirector::sharedDirector()->getWinSize();
-		float zeye = CCDirector::sharedDirector()->getZEye();
-		kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
-		kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
-		kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
-		kmMat4LookAt(&viewMatrix, &eye, &center, &up);
+	// 绘制部分
+	m_glProgram->use();
+	m_glProgram->setUniformsForBuiltins();
 
-		//////////////////////////////////////////////////////////////////////////
-		// 构造MVP
-		// MV矩阵
-		kmMat4 matrixMV;kmMat4Identity(&matrixMV);
-		kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
+	kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
+	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
+	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
+	kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
 
-		// MVP矩阵
-		kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
-		kmMat4 matrixP;kmMat4Identity(&matrixP);
-		kmMat4OrthographicProjection(&matrixP, 0, size.width, 0, size.height, -1024, 1024 );
-		kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
+	//////////////////////////////////////////////////////////////////////////
+	// 定义view
+	kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
+	kmVec3 eye, center, up;
+	// 第一组eyex, eyey,eyez 相机在世界坐标的位置
+	// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
+	// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
+	CCSize size = CCDirector::sharedDirector()->getWinSize();
+	float zeye = CCDirector::sharedDirector()->getZEye();
+	kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
+	kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
+	kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
+	kmMat4LookAt(&viewMatrix, &eye, &center, &up);
 
-		GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
-		m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
-		glBindVertexArray(m_uVao);
-			ccGLBindTexture2D(m_pTexture->getTexture()->getName());
-			//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-			glDrawArrays(GL_TRIANGLES, 0, 24);
-		glBindVertexArray(0);
-	}
-	else
-	{
-		CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-		eglView->Activate();
+	//////////////////////////////////////////////////////////////////////////
+	// 构造MVP
+	// MV矩阵
+	kmMat4 matrixMV;kmMat4Identity(&matrixMV);
+	kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
 
-		// 开启深度测试
-		glEnable(GL_DEPTH_TEST);
+	// MVP矩阵
+	kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
+	kmMat4 matrixP;kmMat4Identity(&matrixP);
+	kmGLGetMatrix(KM_GL_PROJECTION, &matrixP);
+	kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//////////////////////////////////////////////////////////////////////////
+	GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
+	m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
 
-		// 绘制部分
-		m_glProgram->use();
-		m_glProgram->setUniformsForBuiltins();
+	glBindVertexArray(m_uVao);
+	// uniform
+	//GLuint uColorLocation = glGetUniformLocation(m_glProgram->getProgram(), "u_color");
+	//float uColor[] = {1.0, 1.0, 0.6, 1.0};
+	//glUniform4fv(uColorLocation, 1, uColor);
+	ccGLBindTexture2D(m_pTexture->getTexture()->getName());
 
-		kmMat4 modelMatrix;kmMat4Identity(&modelMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_moveMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_rotMatrix);
-		kmMat4Multiply(&modelMatrix, &modelMatrix, &m_scaleMatrix);
+	// 36 = 12 * 3（12个三角形，每个三角形需要3个顶点）
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 
-		//////////////////////////////////////////////////////////////////////////
-		// 定义view
-		kmMat4 viewMatrix;kmMat4Identity(&viewMatrix);
-		kmVec3 eye, center, up;
-		// 第一组eyex, eyey,eyez 相机在世界坐标的位置
-		// 第二组centerx,centery,centerz 相机镜头对准的物体在世界坐标的位置
-		// 第三组upx,upy,upz 相机向上的方向在世界坐标中的方向
-		CCSize size = CCDirector::sharedDirector()->getWinSize();
-		float zeye = CCDirector::sharedDirector()->getZEye();
-		kmVec3Fill( &eye, size.width/2, size.height/2, zeye );
-		kmVec3Fill( &center, size.width/2, size.height/2, 0.0f );
-		kmVec3Fill( &up, 0.0f, 1.0f, 0.0f);
-		kmMat4LookAt(&viewMatrix, &eye, &center, &up);
-
-		//////////////////////////////////////////////////////////////////////////
-		// 构造MVP
-		// MV矩阵
-		kmMat4 matrixMV;kmMat4Identity(&matrixMV);
-		kmMat4Multiply(&matrixMV, &viewMatrix, &modelMatrix);
-
-		// MVP矩阵
-		kmMat4 matrixMVP;kmMat4Identity(&matrixMVP);
-		kmMat4 matrixP;kmMat4Identity(&matrixP);
-		kmGLGetMatrix(KM_GL_PROJECTION, &matrixP);
-		kmMat4Multiply(&matrixMVP, &matrixP, &matrixMV);
-
-		//////////////////////////////////////////////////////////////////////////
-		GLuint mvpUniform = glGetUniformLocation(m_glProgram->getProgram(), "MVP");
-		m_glProgram->setUniformLocationWithMatrix4fv(mvpUniform, matrixMVP.mat, 1);
-
-		glBindVertexArray(m_uVao);
-		// uniform
-		//GLuint uColorLocation = glGetUniformLocation(m_glProgram->getProgram(), "u_color");
-		//float uColor[] = {1.0, 1.0, 0.6, 1.0};
-		//glUniform4fv(uColorLocation, 1, uColor);
-		ccGLBindTexture2D(m_pTexture->getTexture()->getName());
-
-		// 36 = 12 * 3（12个三角形，每个三角形需要3个顶点）
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
-		// 关闭深度测试
-		glDisable(GL_DEPTH_TEST);
-	}
+	// 关闭深度测试
+	glDisable(GL_DEPTH_TEST);
 }
 
 void Sprite3D::setPosition3D( float x, float y, float z )
